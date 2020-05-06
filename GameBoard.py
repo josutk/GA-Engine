@@ -1,5 +1,6 @@
 import pygame
 import os 
+
 class GameBoard:
 
     def __init__(self, height=0, weight=0):
