@@ -1,13 +1,16 @@
 import pygame
 import sys
-from GameBoard import GameBoard
+from model_game.FirstScene import ExperimentalScene
 
 class GameEngine:
 
-	def run():
+	def __init__(self, screen):
+		self.screen = screen
+	
+	def run(self):
 		pygame.init()
-		gameBoard = GameBoard(400, 400)
-		gameBoard.start_board()
+		scene = ExperimentalScene(0)		
+		scene.draw(self.screen)
 		while True:
 			for event in pygame.event.get(): 
 				if event.type == pygame.QUIT:
