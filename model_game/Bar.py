@@ -1,6 +1,7 @@
 import pygame
 from engine.GameObject import GameObject
 from engine.GameColors import BLUE
+import copy
 
 class Bar(GameObject):
 
@@ -18,4 +19,4 @@ class Bar(GameObject):
                                         self.position_y,
                                         self.height,
                                         self.width])
-    
+

@@ -8,5 +8,12 @@ class ExperimentalScene(Scene):
         super().__init__(id)
 
     def draw(self, screen):
-        bar = Bar(screen, 100, 100, 50, 20)
-        bar.draw()
+        horizontal_bar_right = Bar(screen, 0, 0, 400, 20)
+        vertical_bar_top = Bar(screen, 0, 0, 20, 400)
+        horizontal_bar_left = Bar(screen, 400, 380, -400, 20)
+        vertical_bar_botton = Bar(screen, 380, 400, 20, -400 )
+        
+        horizontal_bar_left.draw()
+        vertical_bar_botton.draw()
+        vertical_bar_top.draw()
+        horizontal_bar_right.draw()
