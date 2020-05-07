@@ -1,6 +1,7 @@
 from engine.Scene import Scene
 from Bar import Bar
 import pygame
+from Boundary import Boundary
 
 class ExperimentalScene(Scene):
 
@@ -8,12 +9,5 @@ class ExperimentalScene(Scene):
         super().__init__(id)
 
     def draw(self, screen):
-        horizontal_bar_right = Bar(screen, 0, 0, 400, 20)
-        vertical_bar_top = Bar(screen, 0, 0, 20, 400)
-        horizontal_bar_left = Bar(screen, 400, 380, -400, 20)
-        vertical_bar_botton = Bar(screen, 380, 400, 20, -400 )
-        
-        horizontal_bar_left.draw()
-        vertical_bar_botton.draw()
-        vertical_bar_top.draw()
-        horizontal_bar_right.draw()
+        boundary = Boundary(screen, 0, 0)
+        boundary.draw()

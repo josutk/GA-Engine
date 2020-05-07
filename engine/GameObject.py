@@ -4,12 +4,17 @@ class GameObject:
         self.position_x = position_x
         self.position_y = position_y
     
-    def draw():
+    def draw(self):
         pass
 
-    def update():
+    def update(self):
         pass
+    
+    def set_position_x(self, position_x):
+        self.position_x = position_x
 
-    def get_position():
+    def set_position_y(self, position_y):
+        self.position_y = position_y
+
+    def get_position(self):
         return self.position_x, self.position_y
-

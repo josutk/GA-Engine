@@ -7,7 +7,11 @@ class GameBoard:
         self.height = height
         self.weight = weight
         os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (500, 200)
-
+        self.screen = None
+    
     def start_board(self):
-        screen = pygame.display.set_mode((self.height, self.weight))
-        return screen
+        self.screen = pygame.display.set_mode((self.height, self.weight))
+        return self.screen
+
+    def set_board_color(self, color):
+        self.screen.fill(color)
