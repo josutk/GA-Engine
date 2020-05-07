@@ -1,5 +1,5 @@
 from engine.Scene import Scene
-from HorizontalBar import HorizontalBar
+from Bar import Bar
 import pygame
 
 class ExperimentalScene(Scene):
@@ -8,5 +8,5 @@ class ExperimentalScene(Scene):
         super().__init__(id)
 
     def draw(self, screen):
-        bar = HorizontalBar(screen, 100, 100, 50, 20)
+        bar = Bar(screen, 100, 100, 50, 20)
         bar.draw()
