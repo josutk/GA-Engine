@@ -11,7 +11,6 @@ class GameEngine:
 		pygame.init()
 		scene = ExperimentalScene(self.screen, 0)		
 		scene.load()
-		#scene.draw()
 		while True:
 			self.screen.fill((255,255,255))
 			scene.draw()
@@ -19,5 +18,4 @@ class GameEngine:
 			for event in pygame.event.get(): 
 				if event.type == pygame.QUIT:
 					sys.exit()
-			#self.screen.blit()
 			pygame.display.update()

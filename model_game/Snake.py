@@ -1,6 +1,7 @@
 import pygame
 from engine.GameObject import GameObject
 from engine.GameColors import GREEN
+from engine.KeyBoard import KeyBoard
 
 class Snake(GameObject):
 
@@ -15,18 +16,14 @@ class Snake(GameObject):
         #self.update()
 
     def update(self):
-        events = pygame.event.get()
-        for event in events:
-             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_DOWN:
+        keyBoard = KeyBoard()
+        for event in keyBoard.get_events():
+             if event.type == keyBoard.KEYDOWN:
+                if event.key == keyBoard.DOWN:
                     self.position_y += 5
-                    print('down')
-                if event.key == pygame.K_UP:
+                if event.key == keyBoard.UP:
                     self.position_y -= 5
-                    print('up')
-                if event.key == pygame.K_LEFT:
+                if event.key == keyBoard.LEFT:
                     self.position_x -= 5
-                    print('left')
-                if event.key == pygame.K_RIGHT:
+                if event.key == keyBoard.RIGHT:
                     self.position_x += 5
-                    print('right')
