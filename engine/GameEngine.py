@@ -9,8 +9,8 @@ class GameEngine:
 	
 	def run(self):
 		pygame.init()
-		scene = ExperimentalScene(0)		
-		scene.draw(self.screen)
+		scene = ExperimentalScene(self.screen, 0)		
+		scene.draw()
 		while True:
 			for event in pygame.event.get(): 
 				if event.type == pygame.QUIT:
