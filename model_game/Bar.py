@@ -1,6 +1,6 @@
 import pygame
 from engine.GameObject import GameObject
-from engine.GameColors import BLUE
+from engine.GameColors import BLACK
 import copy
 
 class Bar(GameObject):
@@ -9,13 +9,12 @@ class Bar(GameObject):
                                position_y,
                                height, width):
         
-        super().__init__(position_x, position_y)
-        self.screen = screen
+        super().__init__(screen, position_x, position_y)
         self.height = height
         self.width = width
 
     def draw(self):
-        pygame.draw.rect(self.screen, BLUE, [self.position_x, 
+        pygame.draw.rect(self.screen, BLACK, [self.position_x, 
                                         self.position_y,
                                         self.height,
                                         self.width])

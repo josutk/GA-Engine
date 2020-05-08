@@ -3,9 +3,7 @@ from Bar import Bar
 class Boundary(GameObject):
 
     def __init__(self, screen, position_x, position_y):
-        
-        super().__init__(position_x, position_y)
-        self.screen = screen
+        super().__init__(screen, position_x, position_y)
     
     def draw(self):
         horizontal_bar_right = Bar(self.screen, 0, 0, 400, 20)

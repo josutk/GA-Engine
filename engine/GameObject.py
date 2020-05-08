@@ -1,9 +1,10 @@
 class GameObject:
 
-    def __init__(self, position_x, position_y):
+    def __init__(self, screen, position_x, position_y):
         self.position_x = position_x
         self.position_y = position_y
-    
+        self.screen = screen
+
     def draw(self):
         pass
 

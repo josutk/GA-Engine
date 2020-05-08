@@ -1,6 +1,6 @@
 import pygame
 import sys
-from model_game.FirstScene import ExperimentalScene
+from model_game.ExperimentalScene import ExperimentalScene
 
 class GameEngine:
 
