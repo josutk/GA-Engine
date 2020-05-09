@@ -10,6 +10,6 @@ class Apple(GameObject):
     def draw(self):
         pygame.draw.rect(self.screen, RED, [self.position_x, 
                                         self.position_y,
-                                        15,
-                                        15])
+                                        20,
+                                        20])
 

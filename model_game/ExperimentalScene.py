@@ -1,16 +1,18 @@
 import pygame
 import random
 from engine.Scene import Scene
+from engine.Collision import Collision
 from Bar import Bar
 from Boundary import Boundary
 from Snake import Snake
 from Apple import Apple
 
+
 class ExperimentalScene(Scene):
 
     def __init__(self,screen, id=0):
         super().__init__(screen, id)
-    
+
     def load(self):
         self.boundary = Boundary(self.screen, 0, 0)
         
@@ -19,7 +21,9 @@ class ExperimentalScene(Scene):
         
         apple_position_x, apple_position_y = self.random_position()
         self.apple = Apple(self.screen, apple_position_x, apple_position_y)
-  
+        self.collision = Collision(self.boundary.get_boundaries())
+
+
     def random_position(self):
         x = random.randint(21, 379)
         y = random.randint(21, 379)
@@ -32,3 +36,5 @@ class ExperimentalScene(Scene):
     
     def update(self):
         self.snake.update()
+        if self.collision.check_collision(self.snake):
+            print('colidiu')
