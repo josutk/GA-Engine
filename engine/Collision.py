@@ -5,9 +5,14 @@ class Collision:
     
     def check_collision(self, object):
         if object.get_rectangule().collidelist(self.game_objects_list)>=0:
-            print(self.game_objects_list)
-            return True
+            object_collider = self._get_collider_object(object)
+            return True, object_collider
         else:
-             return False
+             return False, None
+
+    def _get_collider_object(self, object): 
+        for game_object in self.game_objects_list:
+            if object.get_rectangule().colliderect(game_object):
+                return game_object
 
     

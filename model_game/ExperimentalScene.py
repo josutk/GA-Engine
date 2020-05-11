@@ -23,7 +23,6 @@ class ExperimentalScene(Scene):
         self.apple = Apple(self.screen, apple_position_x, apple_position_y)
         self.collision = Collision(self.boundary.get_boundaries())
 
-
     def random_position(self):
         x = random.randint(21, 379)
         y = random.randint(21, 379)
@@ -35,6 +34,15 @@ class ExperimentalScene(Scene):
         self.snake.draw()
     
     def update(self):
-        self.snake.update()
-        if self.collision.check_collision(self.snake):
-            print('colidiu')
+
+        is_collider, object_collider = self.collision.check_collision(self.snake)
+        if object_collider == self.boundary.horizontal_bar_left.get_rectangule(): 
+            self.snake.update(25, 0, 25, -25)
+        elif object_collider == self.boundary.horizontal_bar_right.get_rectangule():
+            self.snake.update(0, -25, 25, -25)
+        elif object_collider == self.boundary.vertical_bar_botton.get_rectangule(): 
+             self.snake.update(25, -25, 0, -25)
+        elif object_collider == self.boundary.vertical_bar_top.get_rectangule():
+            self.snake.update(25, -25, 25, 0)
+        else:
+            self.snake.update(25, -25, 25, -25)
