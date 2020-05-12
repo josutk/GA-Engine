@@ -28,11 +28,11 @@ class Snake(Rectangule):
                     self.set_position_y(new_position)
                 if event.key == keyBoard.LEFT:
                     self.move_rectangule(left, 0)
-                    new_position = self.position_y + left
+                    new_position = self.position_x + left
                     self.set_position_x(new_position)
                 if event.key == keyBoard.RIGHT:
                     self.move_rectangule(right, 0)
-                    new_position = self.position_y + right
+                    new_position = self.position_x + right
                     self.set_position_x(new_position)
     
     def grow_body(self, position_x, position_y):
