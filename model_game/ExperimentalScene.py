@@ -33,8 +33,7 @@ class ExperimentalScene(Scene):
         self.apple.draw()
         self.snake.draw()
     
-    def update(self):
-
+    def limit_movements(self):
         is_collider, object_collider = self.collision.check_collision(self.snake)
         if object_collider == self.boundary.horizontal_bar_left.get_rectangule(): 
             self.snake.update(25, 0, 25, -25)
@@ -46,3 +45,16 @@ class ExperimentalScene(Scene):
             self.snake.update(25, -25, 25, 0)
         else:
             self.snake.update(25, -25, 25, -25)
+
+    def eat_apple(self):
+        is_collider, object_collider = self.collision.check_collision(self.snake)
+        if self.collision.object_colision(self.snake, self.apple):
+            del self.apple
+            new_x, new_y = self.random_position()
+            self.apple = Apple(self.screen, new_x, new_y)
+
+    
+    def update(self):
+        self.limit_movements()
+        self.eat_apple()
+

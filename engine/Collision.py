@@ -15,4 +15,8 @@ class Collision:
             if object.get_rectangule().colliderect(game_object):
                 return game_object
 
-    
+    def object_colision(self, colliding_object, collided_object):
+        if colliding_object.get_rectangule().colliderect(collided_object.get_rectangule()):
+            return True
+        else:
+            return False

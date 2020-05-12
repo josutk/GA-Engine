@@ -14,9 +14,9 @@ class Snake(Rectangule):
         for event in keyBoard.get_events():
              if event.type == keyBoard.KEYDOWN:
                 if event.key == keyBoard.DOWN:
-                    self.move_rectangule(0, botton)
-                if event.key == keyBoard.UP:
                     self.move_rectangule(0, top)
+                if event.key == keyBoard.UP:
+                    self.move_rectangule(0, botton)
                 if event.key == keyBoard.LEFT:
                     self.move_rectangule(left, 0)
                 if event.key == keyBoard.RIGHT:
