@@ -5,7 +5,9 @@ class Rectangule(GameObject):
     
     def __init__(self, screen, position_x, position_y, width, height, color):
         super().__init__(screen, position_x, position_y)
-        self.color = color 
+        self.color = color
+        self.width = width
+        self.height = height
         self.rectangule = pygame.Rect(position_x, position_y, width, height)        
         
     def draw(self):
@@ -22,3 +24,6 @@ class Rectangule(GameObject):
     
     def get_height(self):
         return self.height
+    
+    def update(self):
+        self.rectangule = pygame.Rect(self.position_x, self.position_y, self.width, self.height)  
