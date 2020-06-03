@@ -1,6 +1,5 @@
 import pygame
 import sys
-#from model_game.ExperimentalScene import ExperimentalScene
 
 class GameEngine:
 
@@ -10,7 +9,6 @@ class GameEngine:
 	
 	def run(self):
 		pygame.init()
-		#scene = ExperimentalScene(self.screen, 0)		
 		self.scene.load()
 		while True:
 			self.screen.fill((255,255,255))
