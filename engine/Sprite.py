@@ -14,6 +14,5 @@ class Sprite(pygame.sprite.Sprite):
     def __convert_alpha(self):
         return pygame.image.load(self.path).convert_alpha()
 
-    @classmethod
     def group(self):
         return pygame.sprite.Group()

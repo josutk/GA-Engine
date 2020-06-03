@@ -11,6 +11,9 @@ class GameObject:
     def update(self):
         pass
     
+    def load(self):
+        pass
+
     def set_position_x(self, position_x):
         self.position_x = position_x
 
