@@ -1,13 +1,13 @@
-from engine.Sprite import Sprite
 from engine.GameObject import GameObject
+from engine.Sprite import Sprite
 
-class BackGround(GameObject):
+class LandScape(GameObject):
 
     def __init__(self, screen, position_x, position_y, height, width):
         super().__init__(screen, 0, 0)
-        self.sprite = Sprite('base.png', height, width, None)
+        self.sprite = Sprite('background-day.png', height, width, (600, 600))
+        self.image = self.sprite.get_image()
         self.group = self.sprite.group()
-        self.sprite.get_image()
     
     def load(self):
         self.group.add(self.sprite)
@@ -17,3 +17,4 @@ class BackGround(GameObject):
 
     def draw(self):
         self.group.draw(self.screen)
+
