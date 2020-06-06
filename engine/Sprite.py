@@ -24,3 +24,6 @@ class Sprite(pygame.sprite.Sprite):
 
     def get_image(self):
         return self.image
+
+    def set_position(self, position):
+        self.rect[1] = position
