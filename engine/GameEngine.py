@@ -9,8 +9,10 @@ class GameEngine:
 	
 	def run(self):
 		pygame.init()
+		clock = pygame.time.Clock()
 		self.scene.load()
 		while True:
+			clock.tick(60)
 			self.screen.fill((255,255,255))
 			self.scene.draw()
 			self.scene.update()

@@ -2,7 +2,7 @@ from engine.GameObject import GameObject
 from engine.Sprite import Sprite
 from engine.KeyBoard import KeyBoard
 
-SPEED = 135
+SPEED = 10
 GRAVITY = 1
 class Bird(GameObject):
 
