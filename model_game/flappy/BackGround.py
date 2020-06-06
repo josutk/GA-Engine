@@ -13,6 +13,7 @@ class BackGround(GameObject):
         self.group.add(self.sprite)
     
     def update(self):
+        #self.sprite.rect[0] -=1
         self.group.update()        
 
     def draw(self):
