@@ -1,3 +1,4 @@
+import pygame
 class Collision:
     
     def __init__(self, game_objects_list):
@@ -17,6 +18,12 @@ class Collision:
 
     def object_colision(self, colliding_object, collided_object):
         if colliding_object.get_rectangule().colliderect(collided_object.get_rectangule()):
+            return True
+        else:
+            return False
+
+    def sprite_group_collide(self,first_group, second_group):
+        if  pygame.sprite.groupcollide(first_group, second_group, False, False, pygame.sprite.collide_mask): 
             return True
         else:
             return False

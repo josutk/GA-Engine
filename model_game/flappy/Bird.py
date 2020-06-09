@@ -2,8 +2,6 @@ from engine.GameObject import GameObject
 from engine.Sprite import Sprite
 from engine.KeyBoard import KeyBoard
 
-SPEED = 10
-GRAVITY = 1
 class Bird(GameObject):
 
     def __init__(self, screen, position_x, position_y, height, width):
@@ -29,10 +27,11 @@ class Bird(GameObject):
 
     def movement(self, flag):
         if flag == 'up':
-            self.position_y = -SPEED + self.position_y
+            self.position_y = -10 + self.position_y
             self.sprite.set_position(self.position_y)
         else:
-            self.position_y += GRAVITY
+            self.position_y += 1
             self.sprite.set_position(self.position_y)
+    
     def draw(self):
         self.group.draw(self.screen)

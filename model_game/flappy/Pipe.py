@@ -14,12 +14,12 @@ class Pipe(GameObject):
 
         self.group = self.sprite.group()
 
-
     def load(self):
         self.group.add(self.sprite)
     
     def update(self):
-       self.sprite.rect[0]-=1
-       self.group.update()        
+       self.sprite.rect[0]-= 5 
+       self.group.update()  
+    
     def draw(self):
         self.group.draw(self.screen)

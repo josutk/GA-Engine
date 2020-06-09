@@ -17,3 +17,5 @@ class BackGround(GameObject):
 
     def draw(self):
         self.group.draw(self.screen)
+
+    
