@@ -1,7 +1,8 @@
 from engine.GameObject import GameObject
 from engine.Sprite import Sprite
 from engine.KeyBoard import KeyBoard
-
+import pygame
+import math
 class Bird(GameObject):
 
     def __init__(self, screen, position_x, position_y, height, width):
@@ -11,7 +12,8 @@ class Bird(GameObject):
         self.group = self.sprite.group()
         
         self.position_y = position_y
-    
+        
+
     def load(self):
         self.group.add(self.sprite)
     
@@ -35,3 +37,9 @@ class Bird(GameObject):
     
     def draw(self):
         self.group.draw(self.screen)
+
+
+    def distance(self, sprite_object):
+        dist = math.hypot(self.position_x-sprite_object.position_x, 
+                          self.position_y-sprite_object.position_y)
+        print(dist)

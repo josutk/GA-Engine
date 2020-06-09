@@ -6,6 +6,8 @@ from engine.Sprite import Sprite
 from Bird import Bird
 from Pipe import Pipe
 from engine.Collision import Collision
+from engine.geometric.Line import Line
+from engine.GameColors import RED
 
 class FlappyScene(Scene):
 
@@ -50,6 +52,22 @@ class FlappyScene(Scene):
         self.pipe.update()
         self.pipe_inverted.update()
 
+        pipe_center = self.pipe.sprite.get_sprite_center()
+        pipe_inverted_center = self.pipe_inverted.sprite.get_sprite_center()
+        bird_center = self.bird.sprite.get_sprite_center()
+        backgroud_1_center = self.backGround_1.sprite.get_sprite_center()
+        background_2_center = self.backGround_2.sprite.get_sprite_center()
+
+        line_pipe = Line(self.screen,  pipe_center[0], pipe_center[1], RED)
+        line_pipe_inve = Line(self.screen, pipe_inverted_center[0], pipe_inverted_center[1], RED)
+        line_backGround_1 = Line(self.screen, backgroud_1_center[0], backgroud_1_center[1], RED)
+        line_backGround_2 = Line(self.screen, background_2_center[0], background_2_center[1], RED)
+        
+        line_pipe.draw((bird_center))
+        line_pipe_inve.draw((bird_center))
+        line_backGround_1.draw((bird_center))
+        line_backGround_2.draw((bird_center))
+        
         if self.pipe.sprite.rect[0] <-self.pipe.sprite.rect[2]:
             del self.pipe
             self.pipe = Pipe(self.screen, 0, 0, 1200, 450, False)
