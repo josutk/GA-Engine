@@ -8,7 +8,7 @@ from Pipe import Pipe
 from engine.Collision import Collision
 from engine.geometric.Line import Line
 from engine.GameColors import RED
-
+import random
 class FlappyScene(Scene):
 
     def __init__(self, screen, id=0):
@@ -36,6 +36,7 @@ class FlappyScene(Scene):
         self.collision_handler = Collision(self.game_objects)
 
     def draw(self):
+
         self.backGround_1.draw()
         self.backGround_2.draw()
         self.landScape.draw()
@@ -67,16 +68,19 @@ class FlappyScene(Scene):
         line_pipe_inve.draw((bird_center))
         line_backGround_1.draw((bird_center))
         line_backGround_2.draw((bird_center))
-        
-        if self.pipe.sprite.rect[0] <-self.pipe.sprite.rect[2]:
+
+        y1 = random.randint(450, 500)
+        y2 = random.randint(0, 100)
+            
+        if self.pipe.sprite.rect[0] < -self.pipe.sprite.rect[2]:
             del self.pipe
-            self.pipe = Pipe(self.screen, 0, 0, 1200, 450, False)
+            self.pipe = Pipe(self.screen, 0, 0, 600, y1, False)
             self.pipe.load()
-        
+
         if self.pipe_inverted.sprite.rect[0] < -self.pipe_inverted.sprite.rect[2]:
             del self.pipe_inverted
-            self.pipe_inverted = Pipe(self.screen, 0, 0, 1200, 0, True)
+            self.pipe_inverted = Pipe(self.screen, 0, 0, 600, y2, True)
             self.pipe_inverted.load()
-
+        
         if (self.collision_handler.sprite_group_collide(self.backGround_1.group, self.bird.group)) or (self.collision_handler.sprite_group_collide(self.backGround_2.group, self.bird.group)) or (self.collision_handler.sprite_group_collide(self.bird.group, self.pipe.group)) or (self.collision_handler.sprite_group_collide(self.pipe_inverted.group, self.bird.group)):
             input()
