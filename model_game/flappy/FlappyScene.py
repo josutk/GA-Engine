@@ -18,7 +18,7 @@ class FlappyScene(Scene):
         self.backGround_1 = BackGround(self.screen, 0, 0, 0, 600)
         self.backGround_2 = BackGround(self.screen, 0, 0, 300, 600)
         self.landScape = LandScape(self.screen, 0, 0, 0, 0)
-        
+        self.frame_alive = 0
         self.bird = Bird(self.screen, 300, 400, 300, 400)
         self.pipe = Pipe(self.screen, 0, 0, 1200, 600, False)
         self.pipe_inverted = Pipe(self.screen, 0, 0, 1200, 0, True)
@@ -84,3 +84,6 @@ class FlappyScene(Scene):
         
         if (self.collision_handler.sprite_group_collide(self.backGround_1.group, self.bird.group)) or (self.collision_handler.sprite_group_collide(self.backGround_2.group, self.bird.group)) or (self.collision_handler.sprite_group_collide(self.bird.group, self.pipe.group)) or (self.collision_handler.sprite_group_collide(self.pipe_inverted.group, self.bird.group)):
             input()
+
+        self.frame_alive +=1
+        print(self.frame_alive)             
