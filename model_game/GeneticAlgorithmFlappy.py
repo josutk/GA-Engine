@@ -28,6 +28,8 @@ class GeneticAlgorithmFlappy(GeneticAlgorithmTemplate):
             mutates_weights.append(weights_mutate2)
             model.set_weights(mutates_weights)
         
+        self.new_population()
+
     def neural_network(self):
         model = Sequential()
         model.add(Dense(units=6, input_shape=(3,) , name='inpute'))
