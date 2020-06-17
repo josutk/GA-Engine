@@ -8,9 +8,26 @@ class GeneticAlgorithmFlappy(GeneticAlgorithmTemplate):
 
     def __init__(self, population_size):
         self.population_size = population_size
-        self.generation = []
+        self.generation = np.array([])
         self.indexs = None
 
+    def template(self, scores):
+        self.population()
+        self.fitness(scores)
+        select_individuals = self.generation[self.indexs]
+        it = iter(select_individuals)
+        for idx1, idx2 in zip(it, it):
+            self.crossover(idx, idx+1)
+
+        for model in select_individuals:
+            mutates_weights = []
+            weights = model.get_weights()
+            weights_mutate1 = mutation(weights[0])
+            weights_mutate2 = mutation(weights[1])
+            mutates_weights.append(weights_mutate1)
+            mutates_weights.append(weights_mutate2)
+            model.set_weights(mutates_weights)
+        
     def neural_network(self):
         model = Sequential()
         model.add(Dense(units=6, input_shape=(3,) , name='inpute'))
@@ -21,11 +38,10 @@ class GeneticAlgorithmFlappy(GeneticAlgorithmTemplate):
         for idx in range(population_size):
            model = self.neural_network()
            self.generation.append(model)
-        
+
     def fitness(self, scores):
         np_scores = np.array(scores)
         self.indexs = np_scores.argsort()[-self.population_size/2:][::-1]
-        return indexs
 
     def crossover(self, idx1, idx2):
         weights1 = self.population[idx1].get_weights()
@@ -34,9 +50,10 @@ class GeneticAlgorithmFlappy(GeneticAlgorithmTemplate):
         newWeight2 = weights1
         weights1[0] = newWeight1[0]
         weights2[0] = newWeight2[0]
-        return np.asarray([weights1, weights2])
+        self.generation[idx1].set_weights(weights1)
+        self.generation[idx2].set_weights(weights1)
 
-    def mutation(self, weights):
+    def mutation(self, weight):
         for i in range(len(weights)):
             for j in range(len(weights[i])):
                 if random.random() > 0.7:
