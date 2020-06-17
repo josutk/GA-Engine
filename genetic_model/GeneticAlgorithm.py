@@ -2,8 +2,11 @@ class GeneticAlgorithmTemplate:
 
     def __init__(self):
         pass
-    
-    def fitness_function(self):
+
+    def population(self):
+        pass 
+
+    def fitness(self):
         pass
     
     def mutation(self):
@@ -12,7 +15,7 @@ class GeneticAlgorithmTemplate:
     def parent_selection(self):
         pass
 
-    def cross_over(self):
+    def crossover(self):
         pass
 
     def offspring(self):
