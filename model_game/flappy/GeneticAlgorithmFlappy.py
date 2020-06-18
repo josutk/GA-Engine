@@ -10,9 +10,10 @@ class GeneticAlgorithmFlappy(GeneticAlgorithmTemplate):
         self.population_size = len(neurais_network)
         self.generation = np.array([])
         self.indexs = None
+        self.neurais_network = neurais_network
 
     def template(self, scores):
-        self.population()
+        #self.population()
         self.fitness(scores)
         select_individuals = self.generation[self.indexs]
         it = iter(select_individuals)
@@ -30,8 +31,8 @@ class GeneticAlgorithmFlappy(GeneticAlgorithmTemplate):
         
         self.new_population()
 
-    def population(self, models):
-        for nn in models:
+    def population(self):
+        for nn in self.neurais_network:
            self.generation.append(nn)
 
     def fitness(self, scores):

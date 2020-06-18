@@ -41,3 +41,6 @@ class Bird(GameObject):
     def distance(self, sprite_object):
         dist = math.hypot(self.position_x-sprite_object.position_x, 
                           self.position_y-sprite_object.position_y)
+
+    def get_neural_network(self):
+        return self.neuralNetwork.get_model()

@@ -9,12 +9,15 @@ from engine.Collision import Collision
 from engine.geometric.Line import Line
 from engine.GameColors import RED
 import random
+from GeneticAlgorithmFlappy import GeneticAlgorithmFlappy
+
 class FlappyScene(Scene):
 
     def __init__(self, screen, id=0):
         super().__init__(screen, id)
 
     def load(self):
+        
         self.backGround_1 = BackGround(self.screen, 0, 0, 0, 600, False)
         self.backGround_2 = BackGround(self.screen, 0, 0, 300, 600, False)
         self.backGround_1_inverted = BackGround(self.screen, 0, 0, 0, 0, True)
@@ -34,9 +37,11 @@ class FlappyScene(Scene):
         self.backGround_2.load()
         self.backGround_1_inverted.load()
         self.backGround_2_inverted.load()
+        
+        self.nn = []
         for bird in self.birds_pool:
             bird.load()
-        
+            self.nn.append(bird.get_neural_network())
         self.pipe.load()
         self.pipe_inverted.load()
         self.game_objects = [self.backGround_1, 
@@ -46,6 +51,7 @@ class FlappyScene(Scene):
                                 self.backGround_1_inverted,
                                 self.backGround_2_inverted] + self.birds_pool
         self.collision_handler = Collision(self.game_objects)
+        self.geneticAlgorithmFlappy = GeneticAlgorithmFlappy(self.nn) 
 
     def draw(self):
 
@@ -113,7 +119,5 @@ class FlappyScene(Scene):
             self.pipe_inverted = Pipe(self.screen, 0, 0, 600, y2, True)
             self.pipe_inverted.load()
         
-        #if (self.collision_handler.sprite_group_collide(self.backGround_1.group, self.bird.group)) or (self.collision_handler.sprite_group_collide(self.backGround_1_inverted.group, self.bird.group)) or (self.collision_handler.sprite_group_collide(self.backGround_2_inverted.group, self.bird.group)) or (self.collision_handler.sprite_group_collide(self.backGround_2.group, self.bird.group)) or (self.collision_handler.sprite_group_collide(self.bird.group, self.pipe.group)) or (self.collision_handler.sprite_group_collide(self.pipe_inverted.group, self.bird.group)):
-        #    input()
         
         self.frame_alive +=1
