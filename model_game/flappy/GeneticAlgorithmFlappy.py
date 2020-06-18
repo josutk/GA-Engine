@@ -6,8 +6,8 @@ import random
 
 class GeneticAlgorithmFlappy(GeneticAlgorithmTemplate):
 
-    def __init__(self, population_size):
-        self.population_size = population_size
+    def __init__(self, neurais_network):
+        self.population_size = len(neurais_network)
         self.generation = np.array([])
         self.indexs = None
 
@@ -30,16 +30,9 @@ class GeneticAlgorithmFlappy(GeneticAlgorithmTemplate):
         
         self.new_population()
 
-    def neural_network(self):
-        model = Sequential()
-        model.add(Dense(units=6, input_shape=(3,) , name='input', activation='sigmoid'))
-        model.add(Dense(units=1, input_shape=(6,), activation='sigmoid', name='out'))
-        return model
-
-    def population(self):
-        for idx in range(population_size):
-           model = self.neural_network()
-           self.generation.append(model)
+    def population(self, models):
+        for nn in models:
+           self.generation.append(nn)
 
     def fitness(self, scores):
         np_scores = np.array(scores)

@@ -3,7 +3,7 @@ from engine.Sprite import Sprite
 from engine.KeyBoard import KeyBoard
 import pygame
 import math
-from GeneticAlgorithmFlappy import GeneticAlgorithmFlappy
+from NeuralNetwork import NeuralNetwork
 
 class Bird(GameObject):
 
@@ -12,14 +12,13 @@ class Bird(GameObject):
         self.sprite = Sprite('bluebird-upflap.png', height, width, None)
         self.group = self.sprite.group()
         self.position_y = position_y
-        self.ga = GeneticAlgorithmFlappy(1)
-        self.nn = self.ga.neural_network()
+        self.neuralNetwork = NeuralNetwork()
     
     def load(self):
         self.group.add(self.sprite)
 
     def update(self, params):
-        value = self.nn.predict([params])
+        value = self.neuralNetwork.predict([params])
         if value[0][0] > 0.5:
             flag_movement = 'down'
         else:
