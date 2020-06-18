@@ -3,27 +3,27 @@ from engine.Sprite import Sprite
 from engine.KeyBoard import KeyBoard
 import pygame
 import math
+from GeneticAlgorithmFlappy import GeneticAlgorithmFlappy
+
 class Bird(GameObject):
 
     def __init__(self, screen, position_x, position_y, height, width):
         super().__init__(screen, position_x, position_y)
         self.sprite = Sprite('bluebird-upflap.png', height, width, None)
-        
         self.group = self.sprite.group()
-        
         self.position_y = position_y
-        
-
+        self.ga = GeneticAlgorithmFlappy(1)
+        self.nn = self.ga.neural_network()
+    
     def load(self):
         self.group.add(self.sprite)
-    
-    def update(self):
-        keyBoard = KeyBoard()
-        flag_movement = 'down'
-        for event in keyBoard.get_events():
-            if event.type == keyBoard.KEYDOWN:
-                if event.key == keyBoard.SPACE:
-                    flag_movement = 'up'
+
+    def update(self, params):
+        value = self.nn.predict([params])
+        if value[0][0] > 0.5:
+            flag_movement = 'down'
+        else:
+            flag_movement = 'up'
         self.movement(flag_movement)
         self.group.update()        
 
@@ -42,4 +42,3 @@ class Bird(GameObject):
     def distance(self, sprite_object):
         dist = math.hypot(self.position_x-sprite_object.position_x, 
                           self.position_y-sprite_object.position_y)
-        print(dist)
