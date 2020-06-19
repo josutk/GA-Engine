@@ -16,7 +16,6 @@ class GeneticAlgorithmFlappy(GeneticAlgorithmTemplate):
         self.population()
         self.fitness(scores)
         select_individuals = self.generation[self.indexs]
-        #it = iter(select_individuals)
         for idx in range(0, len(select_individuals), 2):
             self.crossover(idx, idx+1)
 
@@ -30,7 +29,6 @@ class GeneticAlgorithmFlappy(GeneticAlgorithmTemplate):
             mutates_weights.append(weights_mutate2)
             mutates_weights.append(weights[3])
             model.set_weights(mutates_weights)
-        #self.new_population()
 
     def population(self):
         for nn in self.neurais_network:

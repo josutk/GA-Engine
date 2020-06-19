@@ -10,7 +10,7 @@ from engine.geometric.Line import Line
 from engine.GameColors import RED
 import random
 from GeneticAlgorithmFlappy import GeneticAlgorithmFlappy
-
+from BirdException import BirdException
 class FlappyScene(Scene):
 
     def __init__(self, screen, id=0):
@@ -25,8 +25,6 @@ class FlappyScene(Scene):
         self.landScape = LandScape(self.screen, 0, 0, 0, 0)
         self.frame_alive = 0
         self.birds_pool = []
-        self.scores = {}
-        self.dead_birds = []
         self.bird_score = []
         for idx in range(0, 8):
             bird = Bird(self.screen, 300, 400, 300, 400)
@@ -83,26 +81,24 @@ class FlappyScene(Scene):
             for bird in self.birds_pool:
                 x, y = bird.get_position()
                 bird.update([y, pipe_center[0] , pipe_center[1]])    
-                #bird_center = bird.sprite.get_sprite_center()
-                #line_pipe = Line(self.screen,  pipe_center[0], pipe_center[1], RED)
-                #line_pipe_inve = Line(self.screen, pipe_inverted_center[0], pipe_inverted_center[1], RED)
-                #line_backGround_1 = Line(self.screen, backgroud_1_center[0], backgroud_1_center[1], RED)
-                #line_backGround_2 = Line(self.screen, background_2_center[0], background_2_center[1], RED)
+                bird_center = bird.sprite.get_sprite_center()
+                line_pipe = Line(self.screen,  pipe_center[0], pipe_center[1], RED)
+                line_pipe_inve = Line(self.screen, pipe_inverted_center[0], pipe_inverted_center[1], RED)
+                line_backGround_1 = Line(self.screen, backgroud_1_center[0], backgroud_1_center[1], RED)
+                line_backGround_2 = Line(self.screen, background_2_center[0], background_2_center[1], RED)
 
-    #            line_backGround_inverted_1 = Line(self.screen, backgroud_inverted_1_center[0], backgroud_inverted_1_center[1], RED)
-    #            line_backGround_inverted_2 = Line(self.screen, backgroud_inverted_2_center[0], backgroud_inverted_2_center[1], RED)
+                line_backGround_inverted_1 = Line(self.screen, backgroud_inverted_1_center[0], backgroud_inverted_1_center[1], RED)
+                line_backGround_inverted_2 = Line(self.screen, backgroud_inverted_2_center[0], backgroud_inverted_2_center[1], RED)
 
-                #line_pipe.draw((bird_center))
-                #line_pipe_inve.draw((bird_center))
-                #line_backGround_1.draw((bird_center))
-                #line_backGround_2.draw((bird_center))
-                #line_backGround_inverted_1.draw((bird_center))
-                #line_backGround_inverted_2.draw((bird_center))
+                line_pipe.draw((bird_center))
+                line_pipe_inve.draw((bird_center))
+                line_backGround_1.draw((bird_center))
+                line_backGround_2.draw((bird_center))
+                line_backGround_inverted_1.draw((bird_center))
+                line_backGround_inverted_2.draw((bird_center))
                 if (self.collision_handler.sprite_group_collide(self.backGround_1.group, bird.group)) or (self.collision_handler.sprite_group_collide(self.backGround_1_inverted.group, bird.group)) or (self.collision_handler.sprite_group_collide(self.backGround_2_inverted.group, bird.group)) or (self.collision_handler.sprite_group_collide(self.backGround_2.group, bird.group)) or (self.collision_handler.sprite_group_collide(bird.group, self.pipe.group)) or (self.collision_handler.sprite_group_collide(self.pipe_inverted.group, bird.group)):
-                    #self.scores[str(bird.get_bird_id())] = self.frame_alive
                     self.nn.append(bird.get_neural_network())
                     self.bird_score.append(self.frame_alive)
-                    #self.dead_birds.append(bird)
                     self.birds_pool.remove(bird)
             
             self.pipe.update()
@@ -122,9 +118,13 @@ class FlappyScene(Scene):
                 self.pipe_inverted.load()
             self.frame_alive +=1
         else:
-            self.geneticAlgorithmFlappy = GeneticAlgorithmFlappy(self.nn)
-            self.geneticAlgorithmFlappy.template(self.bird_score)
-            for idx in range(0, 4):
-                bird = Bird(self.screen, 300, 400, 300, 400)
-                self.birds_pool.append(bird)
-            self.geneticAlgorithmFlappy.new_population(self.birds_pool)
+            pass
+            #self.geneticAlgorithmFlappy = GeneticAlgorithmFlappy(self.nn)
+            #self.geneticAlgorithmFlappy.template(self.bird_score)
+            #for idx in range(0, 4):
+            #    bird = Bird(self.screen, 300, 400, 300, 400)
+             #   self.birds_pool.append(bird)
+            #self.geneticAlgorithmFlappy.new_population(self.birds_pool)
+        
+        if len(self.birds_pool) == 0:
+            raise BirdException
