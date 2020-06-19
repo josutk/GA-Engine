@@ -11,12 +11,13 @@ from engine.GameColors import RED
 import random
 from GeneticAlgorithmFlappy import GeneticAlgorithmFlappy
 from BirdException import BirdException
+from NeuralNetwork import NeuralNetwork
 class FlappyScene(Scene):
 
     def __init__(self, screen, id=0):
         super().__init__(screen, id)
 
-    def load(self):
+    def load(self, flag):
         
         self.backGround_1 = BackGround(self.screen, 0, 0, 0, 600, False)
         self.backGround_2 = BackGround(self.screen, 0, 0, 300, 600, False)
@@ -26,10 +27,24 @@ class FlappyScene(Scene):
         self.frame_alive = 0
         self.birds_pool = []
         self.bird_score = []
-        for idx in range(0, 8):
-            bird = Bird(self.screen, 300, 400, 300, 400)
-            self.birds_pool.append(bird)
+        self.models_load = []
+        self.load_nn = [] 
+        
+        if flag:
+            for idx in range(0, 8):
+                bird = Bird(self.screen, 300, 400, 300, 400)
+                self.birds_pool.append(bird)
+        else:
+            for i in range(0, 8):
+                #bird = Bird(self.screen, 300, 400, 300, 400)
+                #self.birds_pool.append(bird)
 
+                m = NeuralNetwork()
+                self.load_nn.append(m)
+                self.load_nn[i].get_model().load_weights("models/model" + str(i+1)+ ".keras")        
+                bird = Bird(self.screen, 300, 400, 300, 400, self.load_nn[i])
+                self.birds_pool.append(bird)
+        
         self.pipe = Pipe(self.screen, 0, 0, 1200, 600, False)
         self.pipe_inverted = Pipe(self.screen, 0, 0, 1200, 0, True)
         self.landScape.load()
@@ -118,13 +133,12 @@ class FlappyScene(Scene):
                 self.pipe_inverted.load()
             self.frame_alive +=1
         else:
-            pass
-            #self.geneticAlgorithmFlappy = GeneticAlgorithmFlappy(self.nn)
-            #self.geneticAlgorithmFlappy.template(self.bird_score)
-            #for idx in range(0, 4):
-            #    bird = Bird(self.screen, 300, 400, 300, 400)
-             #   self.birds_pool.append(bird)
-            #self.geneticAlgorithmFlappy.new_population(self.birds_pool)
-        
-        if len(self.birds_pool) == 0:
+            new_birds = []
+            self.geneticAlgorithmFlappy = GeneticAlgorithmFlappy(self.nn)
+            self.geneticAlgorithmFlappy.template(self.bird_score)
+            for idx in range(0, 4):
+                bird = Bird(self.screen, 300, 400, 300, 400)
+                new_birds.append(bird)
+            self.geneticAlgorithmFlappy.new_population(new_birds)
+            self.geneticAlgorithmFlappy.save()
             raise BirdException

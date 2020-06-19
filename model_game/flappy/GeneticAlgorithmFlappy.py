@@ -66,3 +66,9 @@ class GeneticAlgorithmFlappy(GeneticAlgorithmTemplate):
             model = bird.get_neural_network()
             new_generation = np.append(new_generation, model)
         self.generation = new_generation
+    
+    def save(self):
+        idx = 1 
+        for model in self.generation:
+            model.save_weights("models/model" + str(idx)+ ".keras")
+            idx+=1
