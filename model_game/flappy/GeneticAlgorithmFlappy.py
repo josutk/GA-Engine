@@ -11,11 +11,12 @@ class GeneticAlgorithmFlappy(GeneticAlgorithmTemplate):
         self.generation = []
         self.indexs = None
         self.neurais_network = neurais_network
-
+        self.seed_genre = []
     def template(self, scores):
         self.population()
         self.fitness(scores)
         select_individuals = self.generation[self.indexs]
+        self.seed_genre = select_individuals
         for idx in range(0, len(select_individuals), 2):
             self.crossover(idx, idx+1)
 
@@ -53,20 +54,30 @@ class GeneticAlgorithmFlappy(GeneticAlgorithmTemplate):
             for j in range(len(list(weights[i]))):
                 if random.random() > 0.7:
                     if random.randint(0, 500) % 2 == 0:
-                        mutation = random.uniform(-0.3, 0.3)
+                        mutation = random.uniform(-0.8, 0.8)
                         weights[i][j] += mutation
-                    else:
-                        mutation = random.uniform(-0.3, 0.3)
-                        weights[i][j] -= mutation
         return weights
 
     def new_population(self, birds):
         new_generation = self.generation[self.indexs]
+        aux = []
+        i = 0
         for bird in birds:
             model = bird.get_neural_network()
+            weights = model.get_weights()
+            seed_weights = self.seed(weights, i)
+            model.set_weights(seed_weights)
             new_generation = np.append(new_generation, model)
+            i +=1
         self.generation = new_generation
-    
+
+    def seed(self, weights, position):
+        for i in range(len(weights)):
+            for j in range(len(list(weights[i]))):
+                if j % 2 == 0:
+                    weights[i][j]= self.seed_genre[position].get_weights()[i][j]
+        return weights
+
     def save(self):
         idx = 1 
         for model in self.generation:

@@ -18,6 +18,7 @@ class FlappyScene(Scene):
 
     def __init__(self, screen, id=0):
         super().__init__(screen, id)
+        self.highest_score = 0
 
     def load(self, flag, generation_number):
         
@@ -31,7 +32,7 @@ class FlappyScene(Scene):
         self.bird_score = []
         self.models_load = []
         self.load_nn = [] 
-        self.population_size = 8 
+        self.population_size = 20
         self.generation_number = generation_number
         if flag:
             for idx in range(0, self.population_size):
@@ -155,15 +156,14 @@ class FlappyScene(Scene):
                 new_birds.append(bird)
             self.geneticAlgorithmFlappy.new_population(new_birds)
             self.geneticAlgorithmFlappy.save()
+            if self.highest_score < max(self.bird_score):
+                self.highest_score = max(self.bird_score)
             raise BirdException
         
-        show_score = 0
-        if len(self.bird_score) > 0:
-            show_score = max(self.bird_score)
-    
+        
         font = pygame.font.Font('freesansbold.ttf', 11) 
         message = "Geração = " + str(self.generation_number) + " "\
                   "Quantidade de individuos vivos = " + str(len(self.birds_pool)) + " "  \
-                  "Maior quantidade de frames vivos = " + str(show_score) 
+                  "Maior quantidade de frames vivos = " + str(self.highest_score) 
         text = font.render(message, True, (0, 0, 0))
         self.screen.blit(text, (25, 25))
