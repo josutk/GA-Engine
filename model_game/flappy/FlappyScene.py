@@ -32,7 +32,7 @@ class FlappyScene(Scene):
         self.bird_score = []
         self.models_load = []
         self.load_nn = [] 
-        self.population_size = 20
+        self.population_size = 16
         self.generation_number = generation_number
         if flag:
             for idx in range(0, self.population_size):
@@ -45,9 +45,13 @@ class FlappyScene(Scene):
                 self.load_nn[i].get_model().load_weights("models/model" + str(i+1)+ ".keras")        
                 bird = Bird(self.screen, 300, 400, 300, 400, self.load_nn[i])
                 self.birds_pool.append(bird)
+
+
+        y1 = random.randint(450, 500)
+        y2 = random.randint(0, 100)
         
-        self.pipe = Pipe(self.screen, 0, 0, 1200, 600, False)
-        self.pipe_inverted = Pipe(self.screen, 0, 0, 1200, 0, True)
+        self.pipe = Pipe(self.screen, 0, 0, 1200, y1, False)
+        self.pipe_inverted = Pipe(self.screen, 0, 0, 1200, y2, True)
         self.landScape.load()
         self.backGround_1.load()
         self.backGround_2.load()
