@@ -12,13 +12,14 @@ import random
 from GeneticAlgorithmFlappy import GeneticAlgorithmFlappy
 from BirdException import BirdException
 from NeuralNetwork import NeuralNetwork
+import pygame
 
 class FlappyScene(Scene):
 
     def __init__(self, screen, id=0):
         super().__init__(screen, id)
 
-    def load(self, flag):
+    def load(self, flag, generation_number):
         
         self.backGround_1 = BackGround(self.screen, 0, 0, 0, 600, False)
         self.backGround_2 = BackGround(self.screen, 0, 0, 300, 600, False)
@@ -31,6 +32,7 @@ class FlappyScene(Scene):
         self.models_load = []
         self.load_nn = [] 
         self.population_size = 8 
+        self.generation_number = generation_number
         if flag:
             for idx in range(0, self.population_size):
                 bird = Bird(self.screen, 300, 400, 300, 400)
@@ -65,7 +67,7 @@ class FlappyScene(Scene):
                                 self.backGround_2_inverted] + self.birds_pool
         
         self.collision_handler = Collision(self.game_objects)
-
+        
     def draw(self):
         self.landScape.draw()
         self.backGround_1.draw()
@@ -154,3 +156,14 @@ class FlappyScene(Scene):
             self.geneticAlgorithmFlappy.new_population(new_birds)
             self.geneticAlgorithmFlappy.save()
             raise BirdException
+        
+        show_score = 0
+        if len(self.bird_score) > 0:
+            show_score = max(self.bird_score)
+    
+        font = pygame.font.Font('freesansbold.ttf', 11) 
+        message = "Geração = " + str(self.generation_number) + " "\
+                  "Quantidade de individuos vivos = " + str(len(self.birds_pool)) + " "  \
+                  "Maior quantidade de frames vivos = " + str(show_score) 
+        text = font.render(message, True, (0, 0, 0))
+        self.screen.blit(text, (25, 25))

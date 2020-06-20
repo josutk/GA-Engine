@@ -25,13 +25,15 @@ class GameEngine:
 	def run_continuos(self):
 		pygame.init()
 		clock = pygame.time.Clock()
-		self.scene.load(True)
+		generation = 1
+		self.scene.load(True, generation)
 		reload_scene = False
 		while True:
 			clock.tick(60)
 			try:
 				if reload_scene:
-					self.scene.load(False)
+					generation+=1
+					self.scene.load(False, generation)
 					reload_scene = False
 				self.scene.draw()
 				self.scene.update()
