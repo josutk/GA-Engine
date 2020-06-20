@@ -32,7 +32,7 @@ class FlappyScene(Scene):
         self.bird_score = []
         self.models_load = []
         self.load_nn = [] 
-        self.population_size = 16
+        self.population_size = 20
         self.generation_number = generation_number
         if flag:
             for idx in range(0, self.population_size):
