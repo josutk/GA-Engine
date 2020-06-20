@@ -1,6 +1,5 @@
 import pygame
 import sys
-#import BirdException
 from copy import copy 
 
 class GameEngine:
@@ -8,7 +7,6 @@ class GameEngine:
 	def __init__(self, screen, scene):
 		self.screen = screen
 		self.scene = scene	
-		self.screen_copy = copy(screen)
 
 	def run(self):
 		pygame.init()
@@ -27,13 +25,13 @@ class GameEngine:
 	def run_continuos(self):
 		pygame.init()
 		clock = pygame.time.Clock()
-		self.scene.load()
+		self.scene.load(True)
 		reload_scene = False
 		while True:
 			clock.tick(60)
 			try:
 				if reload_scene:
-					self.scene.load()
+					self.scene.load(False)
 					reload_scene = False
 				self.scene.draw()
 				self.scene.update()

@@ -52,11 +52,11 @@ class GeneticAlgorithmFlappy(GeneticAlgorithmTemplate):
         for i in range(len(weights)):
             for j in range(len(list(weights[i]))):
                 if random.random() > 0.7:
-                    if random.randint(0, 5000) % 2 == 0:
-                        mutation = random.uniform(-0.8, 0.8)
+                    if random.randint(0, 500) % 2 == 0:
+                        mutation = random.uniform(-0.3, 0.3)
                         weights[i][j] += mutation
                     else:
-                        mutation = random.uniform(-0.8, 0.8)
+                        mutation = random.uniform(-0.3, 0.3)
                         weights[i][j] -= mutation
         return weights
 
